@@ -40,7 +40,7 @@ class SocialAuthController extends Controller
             ]);
 
             Auth::login($user, true);
-            return redirect(config('fortify.home'));
+            return redirect()->intended(config('fortify.home'));
         } catch(\Exception $e) {
             // if($user->)
             return redirect()->route('login');
