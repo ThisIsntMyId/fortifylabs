@@ -1,5 +1,10 @@
 <h1>Register</h1>
 
+<script>
+    document.cookie = `clientTimezoneStr=${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
+    document.cookie = `clientTimezoneOffsetInMinutes=${-(new Date().getTimezoneOffset())}`;
+</script>
+
 <form method="POST" action="/register">
     @csrf
     Name: <input name="name" type="text"> <br>
@@ -17,6 +22,11 @@
     Password Confirm: <input name="password_confirmation" type="password"> <br>
     @error('password_confirmation')
         Password Confirm Error {{$message}}
+    @enderror
+
+    @tzClientInput
+    @error('clientTimezone_tz')
+        Invalid timezone {{$message}}
     @enderror
     <input type="submit"><br>
 </form>
